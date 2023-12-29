@@ -3,7 +3,6 @@
 import { APP_DOMAIN, HIDE_BACKGROUND_SEGMENTS, cn, fetcher } from "@dub/utils";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import va from "@vercel/analytics";
-import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useParams, useSelectedLayoutSegment } from "next/navigation";
 import useSWR from "swr";
@@ -13,22 +12,22 @@ import { LogoType } from "./icons";
 import { MaxWidthWrapper } from "./max-width-wrapper";
 
 export const navItems = [
-  {
-    name: "Customers",
-    slug: "customers",
-  },
-  {
-    name: "Changelog",
-    slug: "changelog",
-  },
+  // {
+  //   name: "Customers",
+  //   slug: "customers",
+  // },
+  // {
+  //   name: "Changelog",
+  //   slug: "changelog",
+  // },
   {
     name: "Help",
     slug: "help",
   },
-  {
-    name: "Pricing",
-    slug: "pricing",
-  },
+  // {
+  //   name: "Pricing",
+  //   slug: "pricing",
+  // },
 ];
 
 export function Nav() {
@@ -60,7 +59,7 @@ export function Nav() {
         <div className="flex h-14 items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link
-              href={domain === "dub.co" ? "/" : `https://dub.co`}
+              href="/"
               {...(domain !== "dub.co" && {
                 onClick: () => {
                   va.track("Referred from custom domain", {
@@ -72,6 +71,7 @@ export function Nav() {
             >
               <LogoType />
             </Link>
+
             {helpCenter ? (
               <div className="flex items-center">
                 <div className="mr-3 h-5 border-l-2 border-gray-400" />
@@ -89,7 +89,7 @@ export function Nav() {
               >
                 <NavigationMenuPrimitive.List className="flex flex-row space-x-2 p-4">
                   <NavigationMenuPrimitive.Item>
-                    <NavigationMenuPrimitive.Trigger className="group flex items-center space-x-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-100 focus:outline-none">
+                    {/* <NavigationMenuPrimitive.Trigger className="group flex items-center space-x-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-100 focus:outline-none">
                       <p
                         className={cn(
                           "text-sm font-medium text-gray-500 transition-colors ease-out group-hover:text-black",
@@ -101,7 +101,7 @@ export function Nav() {
                         Features
                       </p>
                       <ChevronDown className="h-4 w-4 transition-all group-data-[state=open]:rotate-180" />
-                    </NavigationMenuPrimitive.Trigger>
+                    </NavigationMenuPrimitive.Trigger> */}
 
                     <NavigationMenuPrimitive.Content>
                       <div className="grid w-[32rem] grid-cols-2 gap-1 p-3">
