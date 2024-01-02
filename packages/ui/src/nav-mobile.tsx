@@ -10,7 +10,7 @@ import { FEATURES_LIST } from "./content";
 import { navItems } from "./nav";
 
 export function NavMobile() {
-  const { domain = "dub.co" } = useParams() as { domain: string };
+  const { domain } = useParams() as { domain: string };
   const [open, setOpen] = useState(false);
   const [openFeatures, setOpenFeatures] = useState(false);
   // prevent body scroll when modal is open
@@ -57,7 +57,7 @@ export function NavMobile() {
               className="flex w-full justify-between"
               onClick={() => setOpenFeatures(!openFeatures)}
             >
-              <p className="font-semibold">Features</p>
+              <p className="font-semibold">기능</p>
               <ChevronDown
                 className={cn(
                   "h-5 w-5 text-gray-500 transition-all",
@@ -70,11 +70,7 @@ export function NavMobile() {
                 {FEATURES_LIST.map(({ slug, icon: Icon, shortTitle }) => (
                   <Link
                     key={slug}
-                    href={
-                      domain === "dub.co"
-                        ? `/${slug}`
-                        : `https://dub.co/${slug}`
-                    }
+                    href={`/${slug}`}
                     onClick={() => setOpen(false)}
                     className="flex w-full space-x-2"
                   >
@@ -88,9 +84,7 @@ export function NavMobile() {
           {navItems.map(({ name, slug }) => (
             <li key={slug} className="py-3">
               <Link
-                href={
-                  domain === "dub.co" ? `/${slug}` : `https://dub.co/${slug}`
-                }
+                href={`/${slug}`}
                 onClick={() => setOpen(false)}
                 className="flex w-full font-semibold capitalize"
               >
@@ -105,7 +99,7 @@ export function NavMobile() {
                 href={APP_DOMAIN}
                 className="flex w-full font-semibold capitalize"
               >
-                Dashboard
+                대시보드
               </Link>
             </li>
           ) : (
@@ -115,7 +109,7 @@ export function NavMobile() {
                   href={`${APP_DOMAIN}/login`}
                   className="flex w-full font-semibold capitalize"
                 >
-                  Log in
+                  로그인
                 </Link>
               </li>
 

@@ -23,23 +23,23 @@ export default async function LinkMiddleware(
     return NextResponse.next();
   }
 
-  if (
-    process.env.NODE_ENV !== "development" &&
-    domain === "dub.sh" &&
-    key === "try"
-  ) {
-    if (await isBlacklistedReferrer(req.headers.get("referer"))) {
-      return new Response("Don't DDoS me pls 🥺", { status: 429 });
-    }
-    const ip = ipAddress(req) || LOCALHOST_IP;
-    const { success } = await ratelimit(10, "1 d").limit(
-      `${ip}:${domain}:${key}`,
-    );
+  // if (
+  //   process.env.NODE_ENV !== "development" &&
+  //   domain === "dub.sh" &&
+  //   key === "try"
+  // ) {
+  //   if (await isBlacklistedReferrer(req.headers.get("referer"))) {
+  //     return new Response("Don't DDoS me pls 🥺", { status: 429 });
+  //   }
+  //   const ip = ipAddress(req) || LOCALHOST_IP;
+  //   const { success } = await ratelimit(10, "1 d").limit(
+  //     `${ip}:${domain}:${key}`,
+  //   );
 
-    if (!success) {
-      return new Response("Don't DDoS me pls 🥺", { status: 429 });
-    }
-  }
+  //   if (!success) {
+  //     return new Response("Don't DDoS me pls 🥺", { status: 429 });
+  //   }
+  // }
 
   const inspectMode = key.endsWith("+");
 

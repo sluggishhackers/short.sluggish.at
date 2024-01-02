@@ -17,7 +17,6 @@ export const authOptions: NextAuthOptions = {
     EmailProvider({
       sendVerificationRequest({ identifier, url }) {
         if (process.env.NODE_ENV === "development") {
-          console.log(`Login link: ${url}`);
           return;
         } else {
           sendEmail({
@@ -28,130 +27,130 @@ export const authOptions: NextAuthOptions = {
         }
       },
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-      allowDangerousEmailAccountLinking: true,
-    }),
-    {
-      id: "saml",
-      name: "BoxyHQ",
-      type: "oauth",
-      version: "2.0",
-      checks: ["pkce", "state"],
-      authorization: {
-        url: `${process.env.NEXTAUTH_URL}/api/auth/saml/authorize`,
-        params: {
-          scope: "",
-          response_type: "code",
-          provider: "saml",
-        },
-      },
-      token: {
-        url: `${process.env.NEXTAUTH_URL}/api/auth/saml/token`,
-        params: { grant_type: "authorization_code" },
-      },
-      userinfo: `${process.env.NEXTAUTH_URL}/api/auth/saml/userinfo`,
-      profile: async (profile) => {
-        let existingUser = await prisma.user.findUnique({
-          where: { email: profile.email },
-        });
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID as string,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    //   allowDangerousEmailAccountLinking: true,
+    // }),
+    // {
+    //   id: "saml",
+    //   name: "BoxyHQ",
+    //   type: "oauth",
+    //   version: "2.0",
+    //   checks: ["pkce", "state"],
+    //   authorization: {
+    //     url: `${process.env.NEXTAUTH_URL}/api/auth/saml/authorize`,
+    //     params: {
+    //       scope: "",
+    //       response_type: "code",
+    //       provider: "saml",
+    //     },
+    //   },
+    //   token: {
+    //     url: `${process.env.NEXTAUTH_URL}/api/auth/saml/token`,
+    //     params: { grant_type: "authorization_code" },
+    //   },
+    //   userinfo: `${process.env.NEXTAUTH_URL}/api/auth/saml/userinfo`,
+    //   profile: async (profile) => {
+    //     let existingUser = await prisma.user.findUnique({
+    //       where: { email: profile.email },
+    //     });
 
-        // user is authorized but doesn't have a Dub account, create one for them
-        if (!existingUser) {
-          existingUser = await prisma.user.create({
-            data: {
-              email: profile.email,
-              name: `${profile.firstName || ""} ${
-                profile.lastName || ""
-              }`.trim(),
-            },
-          });
-        }
+    //     // user is authorized but doesn't have a Dub account, create one for them
+    //     if (!existingUser) {
+    //       existingUser = await prisma.user.create({
+    //         data: {
+    //           email: profile.email,
+    //           name: `${profile.firstName || ""} ${
+    //             profile.lastName || ""
+    //           }`.trim(),
+    //         },
+    //       });
+    //     }
 
-        const { id, name, email, image } = existingUser;
+    //     const { id, name, email, image } = existingUser;
 
-        return {
-          id,
-          name,
-          email,
-          image,
-        };
-      },
-      options: {
-        clientId: "dummy",
-        clientSecret: process.env.NEXTAUTH_SECRET as string,
-      },
-      allowDangerousEmailAccountLinking: true,
-    },
-    CredentialsProvider({
-      id: "saml-idp",
-      name: "IdP Login",
-      credentials: {
-        code: {},
-      },
-      async authorize(credentials) {
-        if (!credentials) {
-          return null;
-        }
+    //     return {
+    //       id,
+    //       name,
+    //       email,
+    //       image,
+    //     };
+    //   },
+    //   options: {
+    //     clientId: "dummy",
+    //     clientSecret: process.env.NEXTAUTH_SECRET as string,
+    //   },
+    //   allowDangerousEmailAccountLinking: true,
+    // },
+    // CredentialsProvider({
+    //   id: "saml-idp",
+    //   name: "IdP Login",
+    //   credentials: {
+    //     code: {},
+    //   },
+    //   async authorize(credentials) {
+    //     if (!credentials) {
+    //       return null;
+    //     }
 
-        const { code } = credentials;
+    //     const { code } = credentials;
 
-        if (!code) {
-          return null;
-        }
+    //     if (!code) {
+    //       return null;
+    //     }
 
-        const { oauthController } = await jackson();
+    //     const { oauthController } = await jackson();
 
-        // Fetch access token
-        const { access_token } = await oauthController.token({
-          code,
-          grant_type: "authorization_code",
-          redirect_uri: process.env.NEXTAUTH_URL as string,
-          client_id: "dummy",
-          client_secret: process.env.NEXTAUTH_SECRET as string,
-        });
+    //     // Fetch access token
+    //     const { access_token } = await oauthController.token({
+    //       code,
+    //       grant_type: "authorization_code",
+    //       redirect_uri: process.env.NEXTAUTH_URL as string,
+    //       client_id: "dummy",
+    //       client_secret: process.env.NEXTAUTH_SECRET as string,
+    //     });
 
-        if (!access_token) {
-          return null;
-        }
+    //     if (!access_token) {
+    //       return null;
+    //     }
 
-        // Fetch user info
-        const userInfo = await oauthController.userInfo(access_token);
+    //     // Fetch user info
+    //     const userInfo = await oauthController.userInfo(access_token);
 
-        if (!userInfo) {
-          return null;
-        }
+    //     if (!userInfo) {
+    //       return null;
+    //     }
 
-        let existingUser = await prisma.user.findUnique({
-          where: { email: userInfo.email },
-        });
+    //     let existingUser = await prisma.user.findUnique({
+    //       where: { email: userInfo.email },
+    //     });
 
-        // user is authorized but doesn't have a Dub account, create one for them
-        if (!existingUser) {
-          existingUser = await prisma.user.create({
-            data: {
-              email: userInfo.email,
-              name: `${userInfo.firstName || ""} ${
-                userInfo.lastName || ""
-              }`.trim(),
-            },
-          });
-        }
+    //     // user is authorized but doesn't have a Dub account, create one for them
+    //     if (!existingUser) {
+    //       existingUser = await prisma.user.create({
+    //         data: {
+    //           email: userInfo.email,
+    //           name: `${userInfo.firstName || ""} ${
+    //             userInfo.lastName || ""
+    //           }`.trim(),
+    //         },
+    //       });
+    //     }
 
-        const { id, name, email, image } = existingUser;
+    //     const { id, name, email, image } = existingUser;
 
-        return {
-          id,
-          email,
-          name,
-          email_verified: true,
-          image,
-          // adding profile here so we can access it in signIn callback
-          profile: userInfo,
-        };
-      },
-    }),
+    //     return {
+    //       id,
+    //       email,
+    //       name,
+    //       email_verified: true,
+    //       image,
+    //       // adding profile here so we can access it in signIn callback
+    //       profile: userInfo,
+    //     };
+    //   },
+    // }),
   ],
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
@@ -175,7 +174,6 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     signIn: async ({ user, account, profile }) => {
-      console.log({ user, account, profile });
       if (!user.email || (await isBlacklistedEmail(user.email))) {
         return false;
       }
@@ -285,50 +283,50 @@ export const authOptions: NextAuthOptions = {
   },
   events: {
     async signIn(message) {
-      if (message.isNewUser) {
-        const email = message.user.email as string;
-        const user = await prisma.user.findUnique({
-          where: { email },
-          select: {
-            name: true,
-            createdAt: true,
-          },
-        });
-        // only send the welcome email if the user was created in the last 10s
-        // (this is a workaround because the `isNewUser` flag is triggered when a user does `dangerousEmailAccountLinking`)
-        if (
-          user?.createdAt &&
-          new Date(user.createdAt).getTime() > Date.now() - 10000 &&
-          process.env.NEXT_PUBLIC_IS_DUB
-        ) {
-          await Promise.allSettled([
-            fetch(
-              `https://api.resend.com/audiences/${process.env.RESEND_AUDIENCE_ID}/contacts`,
-              {
-                method: "POST",
-                headers: {
-                  Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  email,
-                  first_name: user.name?.split(" ")[0] || null,
-                  last_name: user.name?.split(" ")[1] || null,
-                }),
-              },
-            ),
-            sendEmail({
-              subject: "Welcome to Dub.co!",
-              email,
-              react: WelcomeEmail({
-                email,
-                name: user.name || null,
-              }),
-              marketing: true,
-            }),
-          ]);
-        }
-      }
+      // if (message.isNewUser) {
+      //   const email = message.user.email as string;
+      //   const user = await prisma.user.findUnique({
+      //     where: { email },
+      //     select: {
+      //       name: true,
+      //       createdAt: true,
+      //     },
+      //   });
+      //   // only send the welcome email if the user was created in the last 10s
+      //   // (this is a workaround because the `isNewUser` flag is triggered when a user does `dangerousEmailAccountLinking`)
+      //   if (
+      //     user?.createdAt &&
+      //     new Date(user.createdAt).getTime() > Date.now() - 10000 &&
+      //     process.env.NEXT_PUBLIC_IS_DUB
+      //   ) {
+      //     await Promise.allSettled([
+      //       fetch(
+      //         `https://api.resend.com/audiences/${process.env.RESEND_AUDIENCE_ID}/contacts`,
+      //         {
+      //           method: "POST",
+      //           headers: {
+      //             Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      //             "Content-Type": "application/json",
+      //           },
+      //           body: JSON.stringify({
+      //             email,
+      //             first_name: user.name?.split(" ")[0] || null,
+      //             last_name: user.name?.split(" ")[1] || null,
+      //           }),
+      //         },
+      //       ),
+      //       sendEmail({
+      //         subject: "Welcome to Dub.co!",
+      //         email,
+      //         react: WelcomeEmail({
+      //           email,
+      //           name: user.name || null,
+      //         }),
+      //         marketing: true,
+      //       }),
+      //     ]);
+      //   }
+      // }
     },
   },
 };

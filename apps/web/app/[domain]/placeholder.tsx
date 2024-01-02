@@ -5,6 +5,7 @@ import { STAGGER_CHILD_VARIANTS } from "@dub/utils";
 import Spline from "@splinetool/react-spline";
 import va from "@vercel/analytics";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
@@ -49,17 +50,20 @@ export default function PlaceholderContent() {
         animate={showText ? "show" : "hidden"}
         className="mx-5 flex flex-col items-center space-y-10 text-center sm:mx-auto"
       >
-        <motion.h1
+        {/* <motion.h1
           className="font-display text-4xl font-bold text-gray-800 transition-colors sm:text-5xl"
           variants={STAGGER_CHILD_VARIANTS}
         >
           Welcome to {process.env.NEXT_PUBLIC_APP_NAME}
-        </motion.h1>
+        </motion.h1> */}
         <motion.p
           className="max-w-xl text-gray-600 transition-colors sm:text-lg"
           variants={STAGGER_CHILD_VARIANTS}
         >
-          <InlineSnippet>{domain}</InlineSnippet> is a custom domain on{" "}
+          <InlineSnippet>{domain}</InlineSnippet> 는 개인과 단체, 영리 조직과
+          비영리 조직 모두를 위한 단축 도메인 관리 플랫폼입니다.
+          <br />
+          오픈소스{" "}
           <a
             className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text font-semibold text-transparent decoration-rose-600 hover:underline"
             href="https://dub.co"
@@ -70,9 +74,13 @@ export default function PlaceholderContent() {
               })
             }
           >
-            {process.env.NEXT_PUBLIC_APP_NAME}
-          </a>{" "}
-          - the link management infrastructure for modern marketing teams.
+            dub.co
+          </a>
+          를 활용하여 만든{" "}
+          <a href="https://sluggish.at" target="_blank">
+            슬러기시 해커스
+          </a>
+          의 프로젝트입니다.
         </motion.p>
         <motion.a
           variants={STAGGER_CHILD_VARIANTS}
@@ -85,7 +93,7 @@ export default function PlaceholderContent() {
           }
           className="rounded-full bg-gray-800 px-10 py-2 font-medium text-white transition-colors hover:bg-black"
         >
-          Create Your Free Branded Link
+          새로운 단축 도메인 만들기
         </motion.a>
       </motion.div>
     </motion.div>

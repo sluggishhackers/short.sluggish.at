@@ -33,10 +33,10 @@ export default function RegisterPage() {
               <Logo className="h-10 w-10" />
             </a>
             <h3 className="text-xl font-semibold">
-              Create your {process.env.NEXT_PUBLIC_APP_NAME} account
+              {process.env.NEXT_PUBLIC_APP_NAME} 계정을 새로 만들어보세요!
             </h3>
             <p className="text-sm text-gray-500">
-              Get started for free. No credit card required.
+              누구나 무료로 시작하실 수 있습니다.
             </p>
           </div>
           <div className="flex flex-col space-y-3 bg-gray-50 px-4 py-8 sm:px-16">

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Google, InfoTooltip } from "@dub/ui";
+import { Button } from "@dub/ui";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -10,13 +10,13 @@ import { toast } from "sonner";
 export default function LoginForm() {
   const searchParams = useSearchParams();
   const next = searchParams?.get("next");
-  const [showEmailOption, setShowEmailOption] = useState(false);
-  const [showSSOOption, setShowSSOOption] = useState(false);
+  const [showEmailOption, setShowEmailOption] = useState(true);
+  // const [showSSOOption, setShowSSOOption] = useState(false);
   const [noSuchAccount, setNoSuchAccount] = useState(false);
   const [email, setEmail] = useState("");
-  const [clickedGoogle, setClickedGoogle] = useState(false);
+  // const [clickedGoogle, setClickedGoogle] = useState(false);
   const [clickedEmail, setClickedEmail] = useState(false);
-  const [clickedSSO, setClickedSSO] = useState(false);
+  // const [clickedSSO, setClickedSSO] = useState(false);
 
   useEffect(() => {
     const error = searchParams?.get("error");
@@ -25,7 +25,7 @@ export default function LoginForm() {
 
   return (
     <>
-      <Button
+      {/* <Button
         text="Continue with Google"
         onClick={() => {
           setClickedGoogle(true);
@@ -36,7 +36,7 @@ export default function LoginForm() {
         loading={clickedGoogle}
         disabled={clickedEmail || clickedSSO}
         icon={<Google className="h-4 w-4" />}
-      />
+      /> */}
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -57,20 +57,20 @@ export default function LoginForm() {
                   setClickedEmail(false);
                   if (res?.ok && !res?.error) {
                     setEmail("");
-                    toast.success("Email sent - check your inbox!");
+                    toast.success("이메일 발송 완료! - 수신함을 확인해보세요!");
                   } else {
-                    toast.error("Error sending email - try again?");
+                    toast.error("이메일을 보내는 중에 오류가 발생했습니다.");
                   }
                 });
               } else {
-                toast.error("No account found with that email address.");
+                toast.error("위 이메일을 가진 사용자를 찾을 수 없습니다.");
                 setNoSuchAccount(true);
                 setClickedEmail(false);
               }
             })
             .catch(() => {
               setClickedEmail(false);
-              toast.error("Error sending email - try again?");
+              toast.error("이메일을 보내는 중에 오류가 발생했습니다.");
             });
         }}
         className="flex flex-col space-y-3"
@@ -83,7 +83,7 @@ export default function LoginForm() {
               name="email"
               autoFocus
               type="email"
-              placeholder="panic@thedis.co"
+              placeholder="hoony@slg.sh"
               autoComplete="email"
               required
               value={email}
@@ -96,21 +96,21 @@ export default function LoginForm() {
           </div>
         )}
         <Button
-          text="Continue with Email"
+          text="이메일 로그인"
           variant="secondary"
           {...(!showEmailOption && {
             type: "button",
             onClick: (e) => {
               e.preventDefault();
-              setShowSSOOption(false);
+              // setShowSSOOption(false);
               setShowEmailOption(true);
             },
           })}
           loading={clickedEmail}
-          disabled={clickedGoogle || clickedSSO}
+          // disabled={clickedGoogle || clickedSSO}
         />
       </form>
-      <form
+      {/* <form
         onSubmit={async (e) => {
           e.preventDefault();
           setClickedSSO(true);
@@ -169,7 +169,7 @@ export default function LoginForm() {
           loading={clickedSSO}
           disabled={clickedGoogle || clickedEmail}
         />
-      </form>
+      </form> */}
       {noSuchAccount ? (
         <p className="text-center text-sm text-red-500">
           No such account.{" "}
@@ -180,12 +180,12 @@ export default function LoginForm() {
         </p>
       ) : (
         <p className="text-center text-sm text-gray-500">
-          Don't have an account?{" "}
+          아직 계정을 가지고 있지 않으신가요?{" "}
           <Link
             href="/register"
             className="font-semibold text-gray-500 transition-colors hover:text-black"
           >
-            Sign up
+            회원가입
           </Link>
           .
         </p>

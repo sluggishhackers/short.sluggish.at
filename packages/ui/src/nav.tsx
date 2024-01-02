@@ -109,11 +109,7 @@ export function Nav() {
                           ({ slug, icon: Icon, title, shortTitle }) => (
                             <Link
                               key={slug}
-                              href={
-                                domain === "dub.co"
-                                  ? `/${slug}`
-                                  : `https://dub.co/${slug}`
-                              }
+                              href={`/${slug}`}
                               {...(domain !== "dub.co" && {
                                 onClick: () => {
                                   va.track("Referred from custom domain", {
@@ -145,11 +141,7 @@ export function Nav() {
                       <Link
                         id={`nav-${slug}`}
                         key={slug}
-                        href={
-                          domain === "dub.co"
-                            ? `/${slug}`
-                            : `https://dub.co/${slug}`
-                        }
+                        href={`/${slug}`}
                         {...(domain !== "dub.co" && {
                           onClick: () => {
                             va.track("Referred from custom domain", {
@@ -182,7 +174,7 @@ export function Nav() {
                 href={APP_DOMAIN}
                 className="animate-fade-in rounded-full border border-black bg-black px-4 py-1.5 text-sm text-white transition-all hover:bg-white hover:text-black"
               >
-                Dashboard
+                대시보드
               </Link>
             ) : !isLoading ? (
               <>
@@ -198,18 +190,18 @@ export function Nav() {
                   })}
                   className="animate-fade-in rounded-full px-4 py-1.5 text-sm font-medium text-gray-500 transition-colors ease-out hover:text-black"
                 >
-                  Log in
+                  로그인
                 </Link>
                 <Link
                   href={`${APP_DOMAIN}/register`}
-                  {...(domain !== "dub.co" && {
-                    onClick: () => {
-                      va.track("Referred from custom domain", {
-                        domain,
-                        medium: `navbar item (signup)`,
-                      });
-                    },
-                  })}
+                  // {...(domain !== "dub.co" && {
+                  //   onClick: () => {
+                  //     va.track("Referred from custom domain", {
+                  //       domain,
+                  //       medium: `navbar item (signup)`,
+                  //     });
+                  //   },
+                  // })}
                   className="animate-fade-in rounded-full border border-black bg-black px-4 py-1.5 text-sm text-white transition-all hover:bg-white hover:text-black"
                 >
                   Sign Up
