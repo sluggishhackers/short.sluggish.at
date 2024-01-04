@@ -79,7 +79,10 @@ export default function LinkFilters() {
     <div className="grid w-full rounded-md bg-white px-5 lg:divide-y lg:divide-gray-300">
       <div className="grid gap-3 py-6">
         <div className="flex items-center justify-between">
-          <h3 className="ml-1 mt-2 font-semibold">Filter Links</h3>
+          <h3 className="ml-1 mt-2 font-semibold">
+            링크 정렬
+            {/* Filter Links */}
+          </h3>
           {showClearButton && <ClearButton searchInputRef={searchInputRef} />}
         </div>
         <SearchBox searchInputRef={searchInputRef} />
@@ -113,7 +116,8 @@ const ClearButton = ({ searchInputRef }) => {
     >
       <XCircle className="h-4 w-4 text-gray-500 transition-all group-hover:text-black" />
       <p className="text-sm text-gray-500 transition-all group-hover:text-black">
-        Clear
+        초기화
+        {/* Clear */}
       </p>
     </button>
   );
@@ -165,7 +169,8 @@ const SearchBox = ({ searchInputRef }) => {
         ref={searchInputRef}
         type="text"
         className="peer w-full rounded-md border border-gray-300 pl-10 text-black placeholder:text-gray-400 focus:border-black focus:ring-0 sm:text-sm"
-        placeholder="Search..."
+        // placeholder="Search..."
+        placeholder="검색하기"
         defaultValue={searchParams?.get("search") || ""}
         onChange={(e) => {
           debounced(e.target.value);
@@ -211,7 +216,10 @@ const DomainsFilter = ({ domains, primaryDomain }) => {
           <ChevronRight
             className={`${collapsed ? "" : "rotate-90"} h-5 w-5 transition-all`}
           />
-          <h4 className="font-medium text-gray-900">Domains</h4>
+          <h4 className="font-medium text-gray-900">
+            도메인
+            {/* Domains */}
+          </h4>
         </button>
         <button
           onClick={() => {
@@ -226,7 +234,10 @@ const DomainsFilter = ({ domains, primaryDomain }) => {
           }}
           className="rounded-md border border-gray-200 px-3 py-1 transition-all hover:border-gray-600 active:bg-gray-100"
         >
-          <p className="text-sm text-gray-500">Add</p>
+          <p className="text-sm text-gray-500">
+            추가하기
+            {/* Add */}
+          </p>
         </button>
       </div>
       <AnimatePresence initial={false}>
@@ -315,7 +326,10 @@ const TagsFilter = ({
           <ChevronRight
             className={`${collapsed ? "" : "rotate-90"} h-5 w-5 transition-all`}
           />
-          <h4 className="font-medium text-gray-900">Tags</h4>
+          <h4 className="font-medium text-gray-900">
+            태그
+            {/* Tags */}
+          </h4>
         </button>
       </div>
       <AnimatePresence initial={false}>
@@ -325,7 +339,10 @@ const TagsFilter = ({
             {...SWIPE_REVEAL_ANIMATION_SETTINGS}
           >
             {tags?.length === 0 ? ( // if the project has no tags
-              <p className="text-center text-sm text-gray-500">No tags yet.</p>
+              <p className="text-center text-sm text-gray-500">
+                태그가 없습니다.
+                {/* No tags yet. */}
+              </p>
             ) : (
               <>
                 <div className="relative mb-1">
@@ -543,7 +560,8 @@ const MyLinksFilter = () => {
   return (
     <div className="flex items-center justify-between py-6">
       <label className="text-sm font-medium text-gray-600">
-        Show my links only
+        내 링크만 보기
+        {/* Show my links only */}
       </label>
       <Switch
         fn={() =>
@@ -571,7 +589,8 @@ const ArchiveFilter = () => {
   return (
     <div className="flex items-center justify-between py-6">
       <label className="text-sm font-medium text-gray-600">
-        Include archived links
+        비활성화 된 링크 포함
+        {/* Include archived links */}
       </label>
       <Switch
         fn={() =>
