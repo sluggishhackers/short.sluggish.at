@@ -26,7 +26,7 @@ export default function NavTabs() {
         { name: "분석", href: `/${slug}/analytics` },
         // { name: "Domains", href: `/${slug}/domains` },
         { name: "도메인", href: `/${slug}/domains` },
-        { name: "Settings", href: `/${slug}/settings` },
+        // { name: "Settings", href: `/${slug}/settings` },
         { name: "설정", href: `/${slug}/settings` },
       ];
     }
