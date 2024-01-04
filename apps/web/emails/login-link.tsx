@@ -24,7 +24,7 @@ export default function LoginLink({
   return (
     <Html>
       <Head />
-      <Preview>Your Dub Login Link</Preview>
+      <Preview>slg.sh 로그인 링크</Preview>
       <Tailwind>
         <Body className="mx-auto my-auto bg-white font-sans">
           <Container className="mx-auto my-10 max-w-[500px] rounded border border-solid border-gray-200 px-10 py-5">
@@ -38,24 +38,25 @@ export default function LoginLink({
               />
             </Section>
             <Heading className="mx-0 my-7 p-0 text-center text-xl font-semibold text-black">
-              Your Login Link
+              로그인 링크
             </Heading>
             <Text className="text-sm leading-6 text-black">
-              Welcome to Dub!
+              slg.sh 로그인 링크를 보내드립니다.
             </Text>
             <Text className="text-sm leading-6 text-black">
-              Please click the magic link below to sign in to your account.
+              아래 로그인 버튼을 클릭하여 slg.sh 로그인을 진행해주세요.
             </Text>
             <Section className="my-8 text-center">
               <Link
                 className="rounded-full bg-black px-6 py-3 text-center text-[12px] font-semibold text-white no-underline"
                 href={url}
               >
-                Sign in
+                로그인
               </Link>
             </Section>
             <Text className="text-sm leading-6 text-black">
-              or copy and paste this URL into your browser:
+              버튼이 눌리지 않거나 동작하지 않는다면 아래 주소를 복사하여
+              브라우저 창에 직접 붙여넣어주세요.
             </Text>
             <Text className="max-w-sm flex-wrap break-words font-medium text-purple-600 no-underline">
               {url.replace(/^https?:\/\//, "")}

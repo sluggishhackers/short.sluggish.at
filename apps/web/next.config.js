@@ -67,9 +67,6 @@ module.exports = {
       {
         hostname: "lh3.googleusercontent.com",
       },
-      {
-        hostname: "media.cleanshot.cloud", // only for staging purposes
-      },
     ],
   },
   async headers() {
