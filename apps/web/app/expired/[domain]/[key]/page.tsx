@@ -37,14 +37,14 @@ export default async function ExpiredPage({
         </div>
         <h1 className="font-display text-5xl font-bold">Expired Link</h1>
         <p className="text-lg text-gray-600">
-          This link has expired. Please contact the owner of this link to get a
-          new one.
+          이 링크는 기간이 만료되었습니다. 새로운 링크를 받으시려면 링크
+          소유자에게 연락해주세요.
         </p>
         <a
           href="https://dub.co"
           className="rounded-full bg-gray-800 px-10 py-2 font-medium text-white transition-colors hover:bg-black"
         >
-          Create Your Free Branded Link
+          무료로 링크를 생성해보세요.
         </a>
       </div>
       <Footer />

@@ -87,14 +87,14 @@ function AddProjectModalHelper({
     >
       <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 px-4 py-4 pt-8 sm:px-16">
         <Logo />
-        <h3 className="text-lg font-medium">Create a new project</h3>
+        <h3 className="text-lg font-medium">새 프로젝트 생성하기</h3>
         <a
           href={`${HOME_DOMAIN}/help/article/what-is-a-project`}
           target="_blank"
           rel="noopener noreferrer"
           className="-translate-y-2 text-center text-xs text-gray-500 underline underline-offset-4 hover:text-gray-800"
         >
-          What is a project?
+          '프로젝트'가 뭔가요?
         </a>
       </div>
 
@@ -117,7 +117,7 @@ function AddProjectModalHelper({
                 router.push(`/welcome?type=upgrade&slug=${slug}`);
               } else {
                 router.push(`/${slug}`);
-                toast.success("Successfully created project!");
+                toast.success("새로운 프로젝트를 생성하였습니다!");
                 setShowAddProjectModal(false);
               }
             } else if (res.status === 422) {

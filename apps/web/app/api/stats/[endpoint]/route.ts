@@ -36,6 +36,7 @@ export const GET = withAuth(
       interval,
       ...searchParams,
     });
+    console.log(response);
     return NextResponse.json(response);
   },
   {

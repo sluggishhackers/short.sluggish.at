@@ -5,7 +5,7 @@ import va from "@vercel/analytics";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { FEATURES_LIST } from "./content";
-import { Github, LinkedIn, LogoType, Twitter } from "./icons";
+import { LogoType } from "./icons";
 import { MaxWidthWrapper } from "./max-width-wrapper";
 
 const navigation = {
@@ -13,18 +13,18 @@ const navigation = {
     name: shortTitle,
     href: `/${slug}`,
   })),
-  product: [
-    { name: "Blog", href: "/blog" },
-    { name: "Changelog", href: "/changelog" },
-    { name: "Customer Stories", href: "/customers" },
-    { name: "Help Center", href: "/help" },
-    { name: "Pricing", href: "/pricing" },
-  ],
-  legal: [
-    { name: "Privacy", href: "/privacy" },
-    { name: "Terms", href: "/terms" },
-    { name: "Abuse", href: "/abuse" },
-  ],
+  // product: [
+  //   { name: "Blog", href: "/blog" },
+  //   { name: "Changelog", href: "/changelog" },
+  //   { name: "Customer Stories", href: "/customers" },
+  //   { name: "Help Center", href: "/help" },
+  //   { name: "Pricing", href: "/pricing" },
+  // ],
+  // legal: [
+  //   { name: "Privacy", href: "/privacy" },
+  //   { name: "Terms", href: "/terms" },
+  //   { name: "Abuse", href: "/abuse" },
+  // ],
   tools: ALL_TOOLS.map(({ name, slug }) => ({
     name,
     href: `/tools/${slug}`,
@@ -54,7 +54,7 @@ export function Footer() {
               })}
             >
               <span className="sr-only">
-                {process.env.NEXT_PUBLIC_APP_NAME} Logo
+                {process.env.NEXT_PUBLIC_APP_NAME} 로고
               </span>
               <LogoType className="h-7 text-gray-600" />
             </Link>
@@ -63,7 +63,7 @@ export function Footer() {
               stand out.
             </p>
             <div className="flex items-center space-x-2">
-              <a
+              {/* <a
                 href="https://twitter.com/dubdotco"
                 target="_blank"
                 rel="noreferrer"
@@ -72,8 +72,9 @@ export function Footer() {
                 <span className="sr-only">Twitter</span>
                 <Twitter className="h-5 w-5 text-gray-600" />
               </a>
-              <div className="h-8 border-l border-gray-200" />
-              <a
+              <div className="h-8 border-l border-gray-200" /> */}
+
+              {/* <a
                 href="https://github.com/dubinc/dub"
                 target="_blank"
                 rel="noreferrer"
@@ -81,9 +82,10 @@ export function Footer() {
               >
                 <span className="sr-only">Github</span>
                 <Github className="h-5 w-5 text-gray-600" />
-              </a>
-              <div className="h-8 border-l border-gray-200" />
-              <a
+              </a> */}
+
+              {/* <div className="h-8 border-l border-gray-200" /> */}
+              {/* <a
                 href="https://www.linkedin.com/company/dubhq/"
                 target="_blank"
                 rel="noreferrer"
@@ -91,7 +93,7 @@ export function Footer() {
               >
                 <span className="sr-only">LinkedIn</span>
                 <LinkedIn className="h-5 w-5" fill="#52525B" />
-              </a>
+              </a> */}
             </div>
           </div>
           <div className="mt-16 grid grid-cols-2 gap-4 xl:col-span-2 xl:mt-0">

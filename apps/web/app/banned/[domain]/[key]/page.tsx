@@ -34,15 +34,15 @@ export default async function BannedPage({
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-gray-300 bg-white/30">
           <ShieldBan className="h-6 w-6 text-gray-400" />
         </div>
-        <h1 className="font-display text-5xl font-bold">Banned Link</h1>
+        <h1 className="font-display text-5xl font-bold">차단된 링크</h1>
         <p className="text-lg text-gray-600">
-          This link has been banned for violating our terms of service.
+          이 링크는 서비스 이용약관을 위반하여 차단되었습니다.
         </p>
         <a
-          href="https://dub.co"
+          href="https://slg.sh"
           className="rounded-full bg-gray-800 px-10 py-2 font-medium text-white transition-colors hover:bg-black"
         >
-          Create Your Free Branded Link
+          무료로 링크를 생성해보세요.
         </a>
       </div>
       <Footer />
